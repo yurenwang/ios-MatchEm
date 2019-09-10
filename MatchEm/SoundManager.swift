@@ -19,11 +19,19 @@ class SoundManager {
         case shuffle
         case match
         case nomatch
+        case background
     }
     
-    static func playSound(_ effect:SoundEffect) {
+    enum SoundFormat {
+        
+        case wav
+        case mp3
+    }
+    
+    static func playSound(_ effect:SoundEffect, _ format:SoundFormat) {
         
         var soundFilename = ""
+        var soundFormatString = ""
         
         // determine sound filename
         switch effect {
@@ -39,10 +47,21 @@ class SoundManager {
             
         case .shuffle:
             soundFilename = "shuffle"
+            
+        case .background:
+            soundFilename = "background"
+        }
+        
+        switch format {
+            
+        case .mp3:
+            soundFormatString = "mp3"
+        case .wav:
+            soundFormatString = "wav"
         }
         
         // get the path to the sound file inside the bundle
-        let bundlePath = Bundle.main.path(forResource: soundFilename, ofType: "wav")
+        let bundlePath = Bundle.main.path(forResource: soundFilename, ofType: soundFormatString)
         
         guard bundlePath != nil else {
             print("Couldn't find source file \(soundFilename) in the bundle")

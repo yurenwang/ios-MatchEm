@@ -22,6 +22,11 @@ class UserPageViewController: UIViewController {
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        SoundManager.playSound(.background, .mp3)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.user?.name = nameField.text
         let startupVC = segue.destination as! StartupViewController

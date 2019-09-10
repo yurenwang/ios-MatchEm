@@ -38,7 +38,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidAppear(_ animated: Bool) {
         
-        SoundManager.playSound(.shuffle)
+        SoundManager.playSound(.shuffle, .wav)
     }
     
     @objc func timerElapsed() {
@@ -97,7 +97,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         if card.isMatched == false && card.isFlipped == false {
             
-            SoundManager.playSound(.flip)
+            SoundManager.playSound(.flip, .wav)
             
             cell.flip()
             card.isFlipped = true
@@ -135,7 +135,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if cardOne.imageName == cardTwo.imageName {
             
             // it's a match
-            SoundManager.playSound(.match)
+            SoundManager.playSound(.match, .wav)
             
             cardOne.isMatched = true
             cardTwo.isMatched = true
@@ -150,7 +150,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         else {
             
             // it's not a match
-            SoundManager.playSound(.nomatch)
+            SoundManager.playSound(.nomatch, .wav)
             
             cardOne.isFlipped = false
             cardTwo.isFlipped = false
