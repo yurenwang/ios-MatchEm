@@ -11,6 +11,7 @@ import UIKit
 class StartupViewController: UIViewController {
 
     @IBOutlet weak var startupNameFieldLabel: UILabel!
+    @IBOutlet weak var personalRecordFieldLabel: UILabel!
     
     static var user: User?
     
@@ -20,6 +21,7 @@ class StartupViewController: UIViewController {
         SoundManager.playSound(.background, .mp3)
 
         self.startupNameFieldLabel.text = "Hi \(StartupViewController.user!.name!)."
+        self.personalRecordFieldLabel.text = "Personal Record: \(StartupViewController.user!.personalRecord ?? 0)"
     }
     
 

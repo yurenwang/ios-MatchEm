@@ -13,6 +13,7 @@ class EndGamePopupViewController: UIViewController {
     var message:String?
     
     @IBOutlet weak var gameEndMessage: UILabel!
+    @IBOutlet weak var newRecordMessage: UILabel!
     
     @IBAction func restartGame(_ sender: Any) {
         
@@ -23,11 +24,14 @@ class EndGamePopupViewController: UIViewController {
         super.viewDidLoad()
         
         self.gameEndMessage.text = GameViewController.endGameMessage
+        self.newRecordMessage.text = GameViewController.newRecordMessage
 
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
 
         self.showAnimate()
     }
+    
+    // removed prepare for segue function as we will be using static user
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //

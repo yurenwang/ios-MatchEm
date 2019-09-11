@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class GameViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -17,12 +18,19 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var cardArray = [Card]()
     
     var timer:Timer?
-    var milliseconds:Float = 40 * 1000
+    var milliseconds:Float = 50 * 1000
     
     var firstFlippedCardIndex:IndexPath?
     
     // the message we want to display to user when game is end
     static var endGameMessage:String?
+    static var newRecordMessage:String?
+    
+    enum GameStatus {
+        
+        case won
+        case lost
+    }
     
     override func viewDidLoad() {
         
@@ -39,6 +47,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerElapsed), userInfo: nil, repeats: true)
         RunLoop.main.add(timer!, forMode: .common)
         
+        GameViewController.endGameMessage = ""
+        GameViewController.newRecordMessage = ""
     }
     
     @objc func timerElapsed() {
@@ -184,7 +194,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         
-        var title = ""
+        var gameStatus:GameStatus?
         
         // if not, then user has won, stop the timer
         if allMatched {
@@ -193,8 +203,13 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 timer?.invalidate()
             }
             
-            title = "Congratulations!"
+            gameStatus = GameStatus.won
             
+            // save user score if user break the personal record
+            if (milliseconds > StartupViewController.user!.personalRecord! * 1000) {
+                saveScore()
+                GameViewController.newRecordMessage = "New Record!"
+            }
         }
         else {
             
@@ -203,26 +218,27 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 return
             }
             
-            title = "Game Over."
+            gameStatus = GameStatus.lost
         }
         
-        // show won/lost message
+        // update the end game message according to win/lost
+        if (gameStatus == GameStatus.won) {
+            
+            GameViewController.endGameMessage = "Congratulations! Your score is " + String(format: "%.2f", milliseconds/1000)
+        }
+        else if (gameStatus == GameStatus.lost) {
+            
+            GameViewController.endGameMessage = "Game Over. You've lost."
+        }
+        
+        // show won/lost message // this function was replaced by the showPopup() which provides a better user interface
 //        showAlert(title, message)
-        self.showPopup(title)
+        self.showPopup()
         
     }
     
     // show popup with endgame message and reset buttons
-    func showPopup(_ title:String) {
-        
-        if (title == "Congratulations!") {
-            
-            GameViewController.endGameMessage = title + " Your score is " + String(format: "%.2f", milliseconds/1000)
-        }
-        else if (title == "Game Over.") {
-            
-            GameViewController.endGameMessage = title + " You've lost."
-        }
+    func showPopup() {
         
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbGameEndPopupViewID") as! EndGamePopupViewController
         self.addChild(popOverVC)
@@ -231,11 +247,21 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popOverVC.didMove(toParent: self)
     }
     
-    // send the endgame message to the popup view
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let popupVC = segue.destination as! EndGamePopupViewController
-//        popupVC.message = GameViewController.endGameMessage
-//    }
+    // save the score that the current user achieved into file system
+    private func saveScore() {
+        
+        StartupViewController.user?.personalRecord = milliseconds / 1000
+        
+        // should use archivedDataWithRootObject:requiringSecureCoding:error: instead
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(StartupViewController.user!, toFile: User.ArchiveURL.path)
+        
+        if isSuccessfulSave {
+            os_log("Successfully saved user")
+        }
+        else {
+            os_log("Failed to save user")
+        }
+    }
     
     // Removing the ShowAlert function due to the newly implemented popup window that shows the game result
     
