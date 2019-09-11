@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0T7-KE-B2a" userLabel="Start Button">
-                                <rect key="frame" x="359" y="223.66666666666666" width="94" height="47.999999999999972"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <rect key="frame" x="343.66666666666669" y="217.66666666666666" width="125" height="59.999999999999972"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="START">
-                                    <color key="titleColor" red="0.15813228630000001" green="0.15813228630000001" blue="0.15813228630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="show" id="l2K-mv-Bqf"/>
@@ -37,7 +37,7 @@
                                     <constraint firstAttribute="width" constant="300" id="mYs-hT-dTF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <color key="textColor" red="0.15813228630000001" green="0.15813228630000001" blue="0.15813228630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -61,6 +61,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbX-RX-p6V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-683" y="699"/>
+        </scene>
+        <!--End Game Popup View Controller-->
+        <scene sceneID="6I0-7m-gbw">
+            <objects>
+                <viewController storyboardIdentifier="sbGameEndPopupViewID" id="S2O-OJ-KNj" customClass="EndGamePopupViewController" customModule="MatchEm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Acq-7n-DFp">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyL-4Z-nMf">
+                                <rect key="frame" x="266" y="97.666666666666686" width="280" height="180"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EV-Sh-Vto">
+                                        <rect key="frame" x="158.66666666666669" y="95.999999999999986" width="103" height="48.000000000000014"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="Restart">
+                                            <color key="titleColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="restartGame:" destination="S2O-OJ-KNj" eventType="touchUpInside" id="jH3-2E-r1o"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="restartID" id="Atv-Ym-DQ3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dl-Q1-bgc">
+                                        <rect key="frame" x="28" y="95.999999999999986" width="84" height="48.000000000000014"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                        <state key="normal" title="Home">
+                                            <color key="titleColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="9M8-gj-kER" kind="show" identifier="homeID" id="Npu-1b-hBF"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="__GameEndMessage__" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgC-p8-9Pf">
+                                        <rect key="frame" x="16.666666666666686" y="44.999999999999986" width="247" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="textColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="7EV-Sh-Vto" firstAttribute="centerY" secondItem="tyL-4Z-nMf" secondAttribute="centerY" constant="30" id="1zF-IU-krQ"/>
+                                    <constraint firstItem="qgC-p8-9Pf" firstAttribute="centerX" secondItem="tyL-4Z-nMf" secondAttribute="centerX" id="6ZC-cH-pd2"/>
+                                    <constraint firstAttribute="height" constant="180" id="Jiv-tU-y7t"/>
+                                    <constraint firstItem="7dl-Q1-bgc" firstAttribute="centerX" secondItem="tyL-4Z-nMf" secondAttribute="centerX" constant="-70" id="Lwc-en-WgL"/>
+                                    <constraint firstItem="7dl-Q1-bgc" firstAttribute="centerY" secondItem="tyL-4Z-nMf" secondAttribute="centerY" constant="30" id="SLf-vF-miJ"/>
+                                    <constraint firstItem="qgC-p8-9Pf" firstAttribute="centerY" secondItem="tyL-4Z-nMf" secondAttribute="centerY" constant="-30" id="hf7-QA-pzm"/>
+                                    <constraint firstItem="7EV-Sh-Vto" firstAttribute="centerX" secondItem="tyL-4Z-nMf" secondAttribute="centerX" constant="70" id="vpZ-hZ-OOS"/>
+                                    <constraint firstAttribute="width" constant="280" id="zF4-kX-mOi"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tyL-4Z-nMf" firstAttribute="centerX" secondItem="Acq-7n-DFp" secondAttribute="centerX" id="lXA-Eu-ib4"/>
+                            <constraint firstItem="tyL-4Z-nMf" firstAttribute="centerY" secondItem="Acq-7n-DFp" secondAttribute="centerY" id="oqe-Lv-CZZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eQ0-O2-rEn"/>
+                    </view>
+                    <connections>
+                        <outlet property="gameEndMessage" destination="qgC-p8-9Pf" id="4CZ-DZ-HSl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pnG-dX-dZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-185" y="-212"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -174,15 +240,15 @@
                                     <constraint firstAttribute="width" constant="300" id="c7e-C5-Atd"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="d4o-Gn-bmb"/>
                                 </constraints>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AtM-gX-DAc">
-                                <rect key="frame" x="366.66666666666669" y="223.66666666666666" width="79" height="47.999999999999972"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <rect key="frame" x="353.66666666666669" y="217.66666666666666" width="105" height="59.999999999999972"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 <state key="normal" title="NEXT">
-                                    <color key="titleColor" red="0.15813228630000001" green="0.15813228630000001" blue="0.15813228630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" white="0.14999999999999999" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <segue destination="9M8-gj-kER" kind="show" id="GZB-pb-sqG"/>
@@ -216,4 +282,8 @@
         <image name="background" width="736" height="414"/>
         <image name="card1" width="158" height="224"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Atv-Ym-DQ3"/>
+        <segue reference="Npu-1b-hBF"/>
+    </inferredMetricsTieBreakers>
 </document>

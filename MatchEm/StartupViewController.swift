@@ -12,12 +12,14 @@ class StartupViewController: UIViewController {
 
     @IBOutlet weak var startupNameFieldLabel: UILabel!
     
-    var user: User?
+    static var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SoundManager.playSound(.background, .mp3)
 
-        self.startupNameFieldLabel.text = "Hi \(user!.name!)."
+        self.startupNameFieldLabel.text = "Hi \(StartupViewController.user!.name!)."
     }
     
 

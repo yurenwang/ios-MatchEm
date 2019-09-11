@@ -17,20 +17,17 @@ class UserPageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SoundManager.playSound(.background, .mp3)
 
         self.user = User(name: "", personalRecord: 0)
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        SoundManager.playSound(.background, .mp3)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.user?.name = nameField.text
-        let startupVC = segue.destination as! StartupViewController
-        startupVC.user = self.user
+//        let startupVC = segue.destination as! StartupViewController
+        StartupViewController.user = self.user
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {

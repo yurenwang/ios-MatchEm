@@ -17,16 +17,21 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var cardArray = [Card]()
     
     var timer:Timer?
-    var milliseconds:Float = 30 * 1000
+    var milliseconds:Float = 40 * 1000
     
     var firstFlippedCardIndex:IndexPath?
-
+    
+    // the message we want to display to user when game is end
+    static var endGameMessage:String?
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        cardArray = model.getCards()
+        SoundManager.playSound(.shuffle, .wav)
 
+        cardArray = model.getCards()
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -34,11 +39,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         timer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(timerElapsed), userInfo: nil, repeats: true)
         RunLoop.main.add(timer!, forMode: .common)
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        SoundManager.playSound(.shuffle, .wav)
     }
     
     @objc func timerElapsed() {
@@ -185,7 +185,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         var title = ""
-        var message = ""
         
         // if not, then user has won, stop the timer
         if allMatched {
@@ -195,7 +194,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             
             title = "Congratulations!"
-            message = "You've won"
             
         }
         else {
@@ -205,26 +203,53 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 return
             }
             
-            title = "Game Over"
-            message = "You've lost"
+            title = "Game Over."
         }
         
         // show won/lost message
-        showAlert(title, message)
+//        showAlert(title, message)
+        self.showPopup(title)
         
     }
     
-    func showAlert(_ title:String, _ message:String) {
+    // show popup with endgame message and reset buttons
+    func showPopup(_ title:String) {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        if (title == "Congratulations!") {
+            
+            GameViewController.endGameMessage = title + " Your score is " + String(format: "%.2f", milliseconds/1000)
+        }
+        else if (title == "Game Over.") {
+            
+            GameViewController.endGameMessage = title + " You've lost."
+        }
         
-        let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        
-        alert.addAction(alertAction)
-        
-        present(alert, animated: true, completion: nil)
-        
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbGameEndPopupViewID") as! EndGamePopupViewController
+        self.addChild(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParent: self)
     }
+    
+    // send the endgame message to the popup view
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let popupVC = segue.destination as! EndGamePopupViewController
+//        popupVC.message = GameViewController.endGameMessage
+//    }
+    
+    // Removing the ShowAlert function due to the newly implemented popup window that shows the game result
+    
+//    func showAlert(_ title:String, _ message:String) {
+//
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//
+//        let alertAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+//
+//        alert.addAction(alertAction)
+//
+//        present(alert, animated: true, completion: nil)
+//
+//    }
     
 
 }
