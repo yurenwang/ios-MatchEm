@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class User: NSObject, NSCoding {
     
@@ -18,10 +19,10 @@ class User: NSObject, NSCoding {
     }
     
     var name: String?
-    var personalRecord: Float?
+    var personalRecord: Double?
     
     // initialization
-    init(name: String, personalRecord: Float) {
+    init(name: String, personalRecord: Double) {
         self.name = name
         self.personalRecord = personalRecord
     }
@@ -39,16 +40,15 @@ class User: NSObject, NSCoding {
     
     required convenience init?(coder aDecoder: NSCoder) {
         
-        let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String
-        let pr = aDecoder.decodeFloat(forKey: PropertyKey.pr)
+        // the initializer should fail if we cannot decode a name
+        guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String else {
+            
+            os_log("No user is saved")
+            return nil
+        }
         
-        if name != nil {
-            
-            self.init(name: name!, personalRecord: pr)
-        }
-        else {
-            
-            self.init(name: "", personalRecord: 0)
-        }
+        let pr = aDecoder.decodeObject(forKey: PropertyKey.pr) as? Double ?? 0.0
+        
+        self.init(name: name, personalRecord: pr)
     }
 }

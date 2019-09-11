@@ -205,10 +205,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card1" translatesAutoresizingMaskIntoConstraints="NO" id="7PQ-gF-l2i">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="233.66666666666666"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="221"/>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back" translatesAutoresizingMaskIntoConstraints="NO" id="Uvu-lJ-MO9">
-                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="233.66666666666666"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="221"/>
                                                         </imageView>
                                                     </subviews>
                                                 </view>
@@ -258,6 +258,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3" y="-49"/>
+        </scene>
+        <!--Saved User View Controller-->
+        <scene sceneID="feS-F5-Zcn">
+            <objects>
+                <viewController storyboardIdentifier="sbSavedUserViewID" id="xoy-Wb-RVz" customClass="SavedUserViewController" customModule="MatchEm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="p9W-n1-UG0">
+                        <rect key="frame" x="0.0" y="0.0" width="812" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="__UserName__" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vzy-ET-0z2">
+                                <rect key="frame" x="308.66666666666669" y="109.66666666666667" width="195" height="36.000000000000014"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RST-Le-pdo">
+                                <rect key="frame" x="227.66666666666663" y="220.66666666666666" width="157" height="53.999999999999972"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <state key="normal" title="New User">
+                                    <color key="titleColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="createNewUser:" destination="xoy-Wb-RVz" eventType="touchUpInside" id="5yC-x7-ocu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jbg-BX-vvR">
+                                <rect key="frame" x="431.66666666666669" y="220.66666666666666" width="149.00000000000006" height="53.999999999999972"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" red="0.87049323320000005" green="0.87064296009999997" blue="0.8704838157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="9M8-gj-kER" kind="show" id="2Ev-U7-g3c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RST-Le-pdo" firstAttribute="centerY" secondItem="p9W-n1-UG0" secondAttribute="centerY" constant="60" id="AEh-6M-eK6"/>
+                            <constraint firstItem="Jbg-BX-vvR" firstAttribute="centerY" secondItem="p9W-n1-UG0" secondAttribute="centerY" constant="60" id="R0h-CE-5Fd"/>
+                            <constraint firstItem="Jbg-BX-vvR" firstAttribute="centerX" secondItem="p9W-n1-UG0" secondAttribute="centerX" constant="100" id="YnP-ol-DhJ"/>
+                            <constraint firstItem="RST-Le-pdo" firstAttribute="centerX" secondItem="p9W-n1-UG0" secondAttribute="centerX" constant="-100" id="Z0q-YV-SLb"/>
+                            <constraint firstItem="Vzy-ET-0z2" firstAttribute="centerX" secondItem="p9W-n1-UG0" secondAttribute="centerX" id="ey7-W4-47B"/>
+                            <constraint firstItem="Vzy-ET-0z2" firstAttribute="centerY" secondItem="p9W-n1-UG0" secondAttribute="centerY" constant="-60" id="w4f-8l-qS5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PnE-kf-SQC"/>
+                    </view>
+                    <connections>
+                        <outlet property="userNameFieldLabel" destination="Vzy-ET-0z2" id="h5B-VL-lZS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pZ0-si-0in" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1383" y="-151"/>
         </scene>
         <!--User Page View Controller-->
         <scene sceneID="Gpg-eU-wcb">
@@ -321,6 +375,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Atv-Ym-DQ3"/>
-        <segue reference="Npu-1b-hBF"/>
+        <segue reference="2Ev-U7-g3c"/>
     </inferredMetricsTieBreakers>
 </document>

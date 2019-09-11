@@ -18,7 +18,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var cardArray = [Card]()
     
     var timer:Timer?
-    var milliseconds:Float = 50 * 1000
+    var milliseconds:Double = 40 * 1000
     
     var firstFlippedCardIndex:IndexPath?
     
@@ -205,10 +205,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             gameStatus = GameStatus.won
             
-            // save user score if user break the personal record
             if (milliseconds > StartupViewController.user!.personalRecord! * 1000) {
-                saveScore()
-                GameViewController.newRecordMessage = "New Record!"
+                GameViewController.newRecordMessage = "New Record!!"
             }
         }
         else {
@@ -220,6 +218,9 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             gameStatus = GameStatus.lost
         }
+        
+        // save user info
+        saveUser()
         
         // update the end game message according to win/lost
         if (gameStatus == GameStatus.won) {
@@ -247,10 +248,11 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         popOverVC.didMove(toParent: self)
     }
     
-    // save the score that the current user achieved into file system
-    private func saveScore() {
+    // save the current user into file system
+    private func saveUser() {
         
-        StartupViewController.user?.personalRecord = milliseconds / 1000
+        // update user's personal record if the newly achieved score is higher
+        StartupViewController.user?.personalRecord = max(StartupViewController.user!.personalRecord!, milliseconds / 1000)
         
         // should use archivedDataWithRootObject:requiringSecureCoding:error: instead
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(StartupViewController.user!, toFile: User.ArchiveURL.path)
